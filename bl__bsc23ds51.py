@@ -36,11 +36,11 @@ class Blockchain:
             'location': location,
             'timestamp': time()
         })
-        return self.last_block.index + 1
+        return self.last_block.index + 1 if self.chain else 1  # Handle empty chain case
 
     @property
     def last_block(self):
-        return self.chain[-1]
+        return self.chain[-1] if self.chain else None  # Handle empty chain case
 
     def to_dict(self):
         return [block.__dict__ for block in self.chain]
@@ -84,3 +84,6 @@ if st.button('View Blockchain'):
         st.write(f"Hash: {block['hash']}")
         st.write(f"Previous Hash: {block['previous_hash']}")
         st.write("---")
+
+        
+  
